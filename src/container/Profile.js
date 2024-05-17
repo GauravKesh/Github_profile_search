@@ -55,19 +55,21 @@ export default function Profile() {
   };
 
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState("github");
   // const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
-  const [userName, setUserName] = useState("null");
-  const [imageUrl, setImageUrl] = useState("");
-  const [followers, setFollowers] = useState("null");
-  const [following, setFollowing] = useState("null");
-  const [location, setLocation] = useState("null");
+  const [userName, setUserName] = useState("github");
+  const [imageUrl, setImageUrl] = useState(
+    "https://avatars.githubusercontent.com/u/9919?s=200&v=4"
+  );
+  const [followers, setFollowers] = useState("0");
+  const [following, setFollowing] = useState("0");
+  const [location, setLocation] = useState("unknown");
   const [lastActive, setLastActive] = useState("Today");
   const [Joined, setJoined] = useState("2020");
   const [fLink, setFLink] = useState("");
   const [flLink, setFlLink] = useState("");
   const [profileURL, setProfileURL] = useState("");
-  const [repo, setRepo] = useState("");
+  const [repo, setRepo] = useState("0");
   const [bio, setBio] = useState("");
   const [repoTittle, setRepoTittle] = useState("repo");
   const [strCnt, setStrCnt] = useState("2");
