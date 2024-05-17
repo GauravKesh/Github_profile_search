@@ -31,7 +31,7 @@ export default function Profile() {
             setLocation(data.location)
             setRepo(data.public_repos)
             setRepoLink(`https://github.com/${data.login}?tab=repositories`)
-            setProfileURL(data.url)
+            setProfileURL(data.html_url)
             console.log("USER DATA FOUND");
             fetchRepo();
             
@@ -301,7 +301,7 @@ export default function Profile() {
                       <div className="repoLink">
                         <div className="linkicon flex flex-wrap flex-col">
                           <a
-                            href={repo_link}
+                            href={profileURL}
                             className="flex flex-wrap space-x-1"
                           >
                             <div className="follow-ic">
