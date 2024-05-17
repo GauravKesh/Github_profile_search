@@ -6,7 +6,7 @@ import Profile from "./container/Profile";
 function App() {
   return (
     <>
-      <div className=" customBackground h-screen">
+      <div className=" bg-grey-900  h-screen">
         <Profile />
       </div>
     </>
