@@ -20,6 +20,7 @@ export default function Profile() {
             alert("USER NOT FOUND ");
             return false;
           } else {
+            setImageUrl(data.avatar_url);
             setName(data.name)
             setUserName(data.login)
             setBio(data.bio)
@@ -51,7 +52,7 @@ export default function Profile() {
     }
      
   const [name, setName] = useState("Gaurav Kesh Roushan");
-  const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
+  // const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
   const [userName, setUserName] = useState("GauravKesh");
   const [imageUrl, setImageUrl] = useState("https://avatars.githubusercontent.com/u/98611148?v=4");
   const [followers, setFollowers] = useState("100");
@@ -61,7 +62,7 @@ export default function Profile() {
   const [Joined, setJoined] = useState("2020");
   const [fLink, setFLink] = useState("https://github.com/GauravKesh?tab=followers");
   const [flLink, setFlLink] = useState("https://github.com/GauravKesh?tab=followers");
-  const [profileURL,setProfileURL] = ("");
+  const [profileURL,setProfileURL] = useState("");
   const [repo, setRepo] = useState("17");
   const [bio, setBio] = useState("Student");
   const [repoTittle, setRepoTittle] = useState("repo");
