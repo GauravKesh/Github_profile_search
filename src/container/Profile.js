@@ -51,20 +51,20 @@ export default function Profile() {
       })
     }
      
-  const [name, setName] = useState("Gaurav Kesh Roushan");
+  const [name, setName] = useState("");
   // const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
-  const [userName, setUserName] = useState("GauravKesh");
-  const [imageUrl, setImageUrl] = useState("https://avatars.githubusercontent.com/u/98611148?v=4");
-  const [followers, setFollowers] = useState("100");
-  const [following, setFollowing] = useState("122");
-  const [location, setLocation] = useState("Bengaluru");
+  const [userName, setUserName] = useState("null");
+  const [imageUrl, setImageUrl] = useState("");
+  const [followers, setFollowers] = useState("null");
+  const [following, setFollowing] = useState("null");
+  const [location, setLocation] = useState("null");
   const [lastActive, setLastActive] = useState("Today");
   const [Joined, setJoined] = useState("2020");
-  const [fLink, setFLink] = useState("https://github.com/GauravKesh?tab=followers");
-  const [flLink, setFlLink] = useState("https://github.com/GauravKesh?tab=followers");
+  const [fLink, setFLink] = useState("");
+  const [flLink, setFlLink] = useState("");
   const [profileURL,setProfileURL] = useState("");
-  const [repo, setRepo] = useState("17");
-  const [bio, setBio] = useState("Student");
+  const [repo, setRepo] = useState("");
+  const [bio, setBio] = useState("");
   const [repoTittle, setRepoTittle] = useState("repo");
   const [strCnt, setStrCnt] = useState("2");
   const [repo_link, setRepoLink] = useState("");
@@ -221,8 +221,8 @@ export default function Profile() {
                     </p>
                   </div>
                 </div>
-                <div className="bio font-bold text-black dark:text-white my-3">
-                  {bio}
+                <div className="bio font-bold  text-balance text-black dark:text-white my-3 ">
+                  <p className="text-balance "> {bio}</p>
                 </div>
                 <div className="peopleInteraction flex flex-wrap space-x-2 ">
                   <div className="icon-people my-1">
