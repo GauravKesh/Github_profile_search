@@ -15,12 +15,12 @@ export default function Profile() {
       .then(function (data) {
         console.log(data);
         if (data.message === "Not Found") {
-          setnotFoundAlert(true)
+          setnotFoundAlert(true);
           alertfn();
           return false;
         } else {
-           setfoundAlert(true);
-           alertfn();
+          setfoundAlert(true);
+          alertfn();
           setImageUrl(data.avatar_url);
           setName(data.name);
           setUserName(data.login);
@@ -53,7 +53,6 @@ export default function Profile() {
       });
   };
 
-
   const [name, setName] = useState("github");
   // const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
   const [userName, setUserName] = useState("github");
@@ -76,13 +75,13 @@ export default function Profile() {
   const [forks_count, setForksCount] = useState(0);
   const [language, setLanguage] = useState("HTML");
 
-  // alert
-  const alertfn=()=>{
-          setTimeout(() => {
-            setfoundAlert(false);
-            setnotFoundAlert(false);
-          }, 800);
-  }
+  // alert function timeout
+  const alertfn = () => {
+    setTimeout(() => {
+      setfoundAlert(false);
+      setnotFoundAlert(false);
+    }, 800);
+  };
 
   return (
     <>
@@ -113,10 +112,7 @@ export default function Profile() {
                       d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <span>
-                    Found the user!!!
-                    
-                  </span>
+                  <span>Found the user!!!</span>
                 </div>
               )}
               {notFoundAlert && (
@@ -298,7 +294,6 @@ export default function Profile() {
                 {/* No of repos */}
                 <div className="repo flex flex-wrap space-x-1">
                   <div class="repo-icon my-1 ">
-                  
                     <a
                       href={repo_link}
                       target="_blank"
@@ -333,7 +328,8 @@ export default function Profile() {
                       <div className="repoLink">
                         <div className="linkicon flex flex-wrap flex-col">
                           <a
-                            href={profileURL} target="_blank"
+                            href={profileURL}
+                            target="_blank"
                             className="flex flex-wrap space-x-1"
                           >
                             <div className="follow-ic">
@@ -372,7 +368,6 @@ export default function Profile() {
             <div className="user-repo-details border-2 rounded-xl  max-w-96  m-2 border-gray-300 dark:border-neutral lg:min-w-96   ">
               <div className="all-repo  rounded  md:h-96 h-96 max-w-96 overflow-y-auto overflow-x-auto  md:overflow-auto  shadow-xl shadow-black flex flex-wrap justify-center p-2  ">
                 {/* REPO ELEMENT  start */}
-                
 
                 <div className="repo w-64  shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral">
                   <div className="repobody ">
