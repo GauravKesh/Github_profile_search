@@ -1,56 +1,55 @@
-
 // import { response } from "express";
 import React from "react";
 import { useState } from "react";
 
 export default function Profile() {
-  
   const [foundAlert, setfoundAlert] = useState(false); // FOR USER FOUND alert
   const [notFoundAlert, setnotFoundAlert] = useState(false); // FOR USER NOT FOUND  alert
-  const [userSearch ,setUserSearch] = useState("");
+  const [userSearch, setUserSearch] = useState("");
 
   // search user data
-   const searchUrl = `https://api.github.com/users/${userSearch}`;
-    const fetchUser = async () => {
-      await fetch(searchUrl)
-        .then((response) => response.json())
-        .then(function (data) {
-          console.log(data);
-          if (data.message === "Not Found") {
-            alert("USER NOT FOUND ");
-            return false;
-          } else {
-            setImageUrl(data.avatar_url);
-            setName(data.name)
-            setUserName(data.login)
-            setBio(data.bio)
-            setFollowers(data.followers)
-            setFLink(`https://github.com/${data.login}?tab=followers`)
-            setFollowing(data.following)
-            setFLink(`https://github.com/${data.login}?tab=following`);
-            setLocation(data.location)
-            setRepo(data.public_repos)
-            setRepoLink(`https://github.com/${data.login}?tab=repositories`)
-            setProfileURL(data.html_url)
-            console.log("USER DATA FOUND");
-            fetchRepo();
-            
-          }
-        });
-    };   
-    // search user repo data
-    const repoUrl = `https://api.github.com/users/${userSearch}/repos`;
-    const fetchRepo = async()=>{
-      await fetch(repoUrl).then((response)=> response.json()).then(function(repoData){
+  const searchUrl = `https://api.github.com/users/${userSearch}`;
+  const fetchUser = async () => {
+    await fetch(searchUrl)
+      .then((response) => response.json())
+      .then(function (data) {
+        console.log(data);
+        if (data.message === "Not Found") {
+          alert("USER NOT FOUND ");
+          return false;
+        } else {
+          setImageUrl(data.avatar_url);
+          setName(data.name);
+          setUserName(data.login);
+          setBio(data.bio);
+          setFollowers(data.followers);
+          setFLink(`https://github.com/${data.login}?tab=followers`);
+          setFollowing(data.following);
+          setFlLink(`https://github.com/${data.login}?tab=following`);
+          setLocation(data.location);
+          setRepo(data.public_repos);
+          setRepoLink(`https://github.com/${data.login}?tab=repositories`);
+          setProfileURL(data.html_url);
+          console.log("USER DATA FOUND");
+          fetchRepo();
+        }
+      });
+  };
+  // search user repo data
+  const repoUrl = `https://api.github.com/users/${userSearch}/repos`;
+  const fetchRepo = async () => {
+    await fetch(repoUrl)
+      .then((response) => response.json())
+      .then(function (repoData) {
         console.log(repoData);
-        if(repoData.message==="not found"){
+        if (repoData.message === "not found") {
           alert("USER DOESN'T HAVE ANY REPO");
-        }else{
+        } else {
           console.log("USER HAVE REPO");
         }
-      })
-    }
-     
+      });
+  };
+
   const [name, setName] = useState("");
   // const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
   const [userName, setUserName] = useState("null");
@@ -62,7 +61,7 @@ export default function Profile() {
   const [Joined, setJoined] = useState("2020");
   const [fLink, setFLink] = useState("");
   const [flLink, setFlLink] = useState("");
-  const [profileURL,setProfileURL] = useState("");
+  const [profileURL, setProfileURL] = useState("");
   const [repo, setRepo] = useState("");
   const [bio, setBio] = useState("");
   const [repoTittle, setRepoTittle] = useState("repo");
@@ -70,7 +69,6 @@ export default function Profile() {
   const [repo_link, setRepoLink] = useState("");
   const [forks_count, setForksCount] = useState(0);
   const [language, setLanguage] = useState("HTML");
-  
 
   return (
     <>
@@ -239,7 +237,12 @@ export default function Profile() {
                     </svg>
                   </div>
                   <div className="followers flex">
-                    <a href={fLink} className="flex flex-wrap space-x-1">
+                    <a
+                      href={fLink}
+                      target="_blank"
+                      target="_blank"
+                      className="flex flex-wrap space-x-1"
+                    >
                       <div className="fnum font-bold dark:text-white ">
                         {followers}
                       </div>
@@ -248,7 +251,11 @@ export default function Profile() {
                   </div>
                   <span>|</span>
                   <div className="flex ">
-                    <a href={flLink} className="flex flex-wrap space-x-1">
+                    <a
+                      href={flLink}
+                      target="_blank"
+                      className="flex flex-wrap space-x-1"
+                    >
                       <div className="fnum font-bold   dark:text-white">
                         {following}
                       </div>
@@ -275,20 +282,29 @@ export default function Profile() {
                 </div>
                 {/* No of repos */}
                 <div className="repo flex flex-wrap space-x-1">
-                  <div class="repo-icon my-1  ">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="1em"
-                      height="1em"
-                      viewBox="0 0 16 16"
+                  <div class="repo-icon my-1 ">
+                    <a
+                      href={repo_link}
+                      target="_blank"
+                      className="flex flex-wrap  space-x-1"
                     >
-                      <path
-                        fill="currentColor"
-                        d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7a.75.75 0 1 1-1.072 1.05A2.5 2.5 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.5 2.5 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"
-                      />
-                    </svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 16 16"
+                        className="mt-1"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7a.75.75 0 1 1-1.072 1.05A2.5 2.5 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.5 2.5 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"
+                        />
+                      </svg>
+                      <div className="repo-count dark:text-gray-300">
+                        {repo}
+                      </div>
+                    </a>
                   </div>
-                  <div className="repo-count dark:text-gray-300">{repo}</div>
                 </div>
                 {/* FOLLOW BUTTON */}
                 <div className="follow-btn">
@@ -301,7 +317,7 @@ export default function Profile() {
                       <div className="repoLink">
                         <div className="linkicon flex flex-wrap flex-col">
                           <a
-                            href={profileURL}
+                            href={profileURL} target="_blank"
                             className="flex flex-wrap space-x-1"
                           >
                             <div className="follow-ic">
