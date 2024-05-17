@@ -1,4 +1,4 @@
-// import { response } from "express";
+/* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { useState } from "react";
 
@@ -15,9 +15,13 @@ export default function Profile() {
       .then(function (data) {
         console.log(data);
         if (data.message === "Not Found") {
-          alert("USER NOT FOUND ");
+          
+          setnotFoundAlert(true)
+          alertfn();
           return false;
         } else {
+           setfoundAlert(true);
+           alertfn();
           setImageUrl(data.avatar_url);
           setName(data.name);
           setUserName(data.login);
@@ -50,6 +54,7 @@ export default function Profile() {
       });
   };
 
+
   const [name, setName] = useState("");
   // const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
   const [userName, setUserName] = useState("null");
@@ -69,6 +74,14 @@ export default function Profile() {
   const [repo_link, setRepoLink] = useState("");
   const [forks_count, setForksCount] = useState(0);
   const [language, setLanguage] = useState("HTML");
+
+  // alert
+  const alertfn=()=>{
+          setTimeout(() => {
+            setfoundAlert(false);
+            setnotFoundAlert(false);
+          }, 800);
+  }
 
   return (
     <>
@@ -283,6 +296,7 @@ export default function Profile() {
                 {/* No of repos */}
                 <div className="repo flex flex-wrap space-x-1">
                   <div class="repo-icon my-1 ">
+                  
                     <a
                       href={repo_link}
                       target="_blank"
