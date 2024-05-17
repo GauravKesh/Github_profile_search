@@ -271,7 +271,7 @@ export default function Profile() {
                     />
                   </svg>
 
-                  <span className="pb-1  dark:text-gray-300">Bengaluru</span>
+                  <span className="pb-1  dark:text-gray-300">{location}</span>
                 </div>
                 {/* No of repos */}
                 <div className="repo flex flex-wrap space-x-1">
