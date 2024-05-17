@@ -15,7 +15,6 @@ export default function Profile() {
       .then(function (data) {
         console.log(data);
         if (data.message === "Not Found") {
-          
           setnotFoundAlert(true)
           alertfn();
           return false;
@@ -152,7 +151,7 @@ export default function Profile() {
                   <label for="simple-search" className="sr-only">
                     Search
                   </label>
-                  <div className="relative w-full shadow-xl shadow-black rounded-2xl">
+                  <div className="relative w-full shadow-md shadow-black rounded-2xl">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +168,8 @@ export default function Profile() {
                     <input
                       type="text"
                       id="simple-search"
-                      className="bg-gray-50 border Search border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 placeholder-slate-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border Search border-gray-300 text-gray-900 text-sm rounded-lg
+                       focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 placeholder-slate-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Search Github User ..."
                       required
                     />
@@ -372,6 +372,7 @@ export default function Profile() {
             <div className="user-repo-details border-2 rounded-xl  max-w-96  m-2 border-gray-300 dark:border-neutral lg:min-w-96   ">
               <div className="all-repo  rounded  md:h-96 h-96 max-w-96 overflow-y-auto overflow-x-auto  md:overflow-auto  shadow-xl shadow-black flex flex-wrap justify-center p-2  ">
                 {/* REPO ELEMENT  start */}
+                
 
                 <div className="repo w-64  shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral">
                   <div className="repobody ">
