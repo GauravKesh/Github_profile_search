@@ -20,6 +20,17 @@ export default function Profile() {
             alert("USER NOT FOUND ");
             return false;
           } else {
+            setName(data.name)
+            setUserName(data.login)
+            setBio(data.bio)
+            setFollowers(data.followers)
+            setFLink(`https://github.com/${data.login}?tab=followers`)
+            setFollowing(data.following)
+            setFLink(`https://github.com/${data.login}?tab=following`);
+            setLocation(data.location)
+            setRepo(data.public_repos)
+            setRepoLink(`https://github.com/${data.login}?tab=repositories`)
+            setProfileURL(data.url)
             console.log("USER DATA FOUND");
             fetchRepo();
             
@@ -50,6 +61,7 @@ export default function Profile() {
   const [Joined, setJoined] = useState("2020");
   const [fLink, setFLink] = useState("https://github.com/GauravKesh?tab=followers");
   const [flLink, setFlLink] = useState("https://github.com/GauravKesh?tab=followers");
+  const [profileURL,setProfileURL] = ("");
   const [repo, setRepo] = useState("17");
   const [bio, setBio] = useState("Student");
   const [repoTittle, setRepoTittle] = useState("repo");
@@ -57,6 +69,7 @@ export default function Profile() {
   const [repo_link, setRepoLink] = useState("");
   const [forks_count, setForksCount] = useState(0);
   const [language, setLanguage] = useState("HTML");
+  
 
   return (
     <>
