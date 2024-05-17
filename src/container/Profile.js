@@ -114,7 +114,7 @@ export default function Profile() {
                   </svg>
                   <span>
                     Found the user!!!
-                    <span className="text-grey-500"> Task Added</span>
+                    
                   </span>
                 </div>
               )}
