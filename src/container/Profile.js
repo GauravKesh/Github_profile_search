@@ -205,7 +205,7 @@ export default function Profile() {
           <div className="github-detail  rounded flex  flex-wrap flex-row mt-3  h-96 justify-center md:flex-col sm:flex-col lg:justify-center md:justify-center  ">
             {/* PROFILE DATA */}
 
-            <div className="github-user-data-side mt-2 rounded-xl border-2 border-gray-300 dark:border-neutral h-full w-96   lg:w-96  flex flex-wrap flex-col  justify-center  shadow-xl shadow-black">
+            <div className="github-user-data-side mt-2 rounded-xl border-2 border-gray-300 dark:border-neutral h-full    lg:w-96  flex flex-wrap flex-col  justify-center  shadow-xl shadow-black">
               <div className="data-side-inside mx-3">
                 <div className="profile-img flex justify-center mb-2">
                   <div className="avatar ">
@@ -368,7 +368,7 @@ export default function Profile() {
                   repoArrayData.map((item, index) => {
                     return (
                       <div
-                        className="repo w-64  shadow-md shadow-slate-200 overflow-hidden h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral"
+                        className="repo w-64  shadow-md shadow-black overflow-hidden h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral"
                         key={index}
                       >
                         <div className="repobody mt-2">
