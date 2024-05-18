@@ -6,6 +6,29 @@ export default function Profile() {
   const [foundAlert, setfoundAlert] = useState(false); // FOR USER FOUND alert
   const [notFoundAlert, setnotFoundAlert] = useState(false); // FOR USER NOT FOUND  alert
   const [userSearch, setUserSearch] = useState("");
+  const [name, setName] = useState("github");
+  // const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
+  const [userName, setUserName] = useState("github");
+  const [imageUrl, setImageUrl] = useState(
+    "https://avatars.githubusercontent.com/u/9919?s=200&v=4"
+  );
+  const [followers, setFollowers] = useState("0");
+  const [following, setFollowing] = useState("0");
+  const [location, setLocation] = useState("unknown");
+  const [lastActive, setLastActive] = useState("Today");
+  const [Joined, setJoined] = useState("2020");
+  const [fLink, setFLink] = useState("");
+  const [flLink, setFlLink] = useState("");
+  const [profileURL, setProfileURL] = useState("");
+  const [repo, setRepo] = useState("0");
+  const [bio, setBio] = useState("");
+  const [repoTittle, setRepoTittle] = useState("repo");
+  const [strCnt, setStrCnt] = useState("2");
+  const [repo_link, setRepoLink] = useState("");
+  const [forks_count, setForksCount] = useState(0);
+  const [language, setLanguage] = useState("HTML");
+  const [repoArrayData,setRepoArrayData] = useState([]);
+  const[showRepo,setShowRepo] = useState("true")
 
   // search user data
   const searchUrl = `https://api.github.com/users/${userSearch}`;
@@ -41,6 +64,14 @@ export default function Profile() {
   // search user repo data
   const repoUrl = `https://api.github.com/users/${userSearch}/repos`;
   const fetchRepo = async () => {
+    // try {
+    //   const response = await fetch(repoUrl);
+    //   const repoData = await response.json();
+
+    //   setRepoArrayData(repoData); // Update repoData with the fetched data
+    // } catch (error) {
+    //   console.error("Error fetching repo data:", error);
+    // }
     await fetch(repoUrl)
       .then((response) => response.json())
       .then(function (repoData) {
@@ -49,34 +80,15 @@ export default function Profile() {
           alert("USER DOESN'T HAVE ANY REPO");
         } else {
           console.log("USER HAVE REPO");
+          const arr = Object.values(repoData)
+          setRepoArrayData(arr);
+          console.log(repoArrayData);
         }
       });
   };
-
-  const [name, setName] = useState("github");
-  // const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
-  const [userName, setUserName] = useState("github");
-  const [imageUrl, setImageUrl] = useState(
-    "https://avatars.githubusercontent.com/u/9919?s=200&v=4"
-  );
-  const [followers, setFollowers] = useState("0");
-  const [following, setFollowing] = useState("0");
-  const [location, setLocation] = useState("unknown");
-  const [lastActive, setLastActive] = useState("Today");
-  const [Joined, setJoined] = useState("2020");
-  const [fLink, setFLink] = useState("");
-  const [flLink, setFlLink] = useState("");
-  const [profileURL, setProfileURL] = useState("");
-  const [repo, setRepo] = useState("0");
-  const [bio, setBio] = useState("");
-  const [repoTittle, setRepoTittle] = useState("repo");
-  const [strCnt, setStrCnt] = useState("2");
-  const [repo_link, setRepoLink] = useState("");
-  const [forks_count, setForksCount] = useState(0);
-  const [language, setLanguage] = useState("HTML");
-
   // alert function timeout
-  const alertfn = () => {
+  const alertfn = (e) => {
+    
     setTimeout(() => {
       setfoundAlert(false);
       setnotFoundAlert(false);
@@ -136,7 +148,7 @@ export default function Profile() {
             </div>
             {/* USER SEARCH PROFILE */}
             <div className="github-profile-search">
-              <div className="searchbar mt-5 ">
+              <div className="searchbar mt-5 " id="searchBar">
                 <form
                   className="flex items-center max-w-sm mx-auto "
                   value={userSearch}
@@ -176,6 +188,7 @@ export default function Profile() {
                     onClick={(e) => {
                       console.log(userSearch);
                       e.preventDefault();
+                      document.getElementById("searchBar").value = "";
                       fetchUser();
                     }}
                   >
@@ -231,9 +244,7 @@ export default function Profile() {
                   </div>
                 </div>
                 <div className="bio font-bold  text-balance text-black dark:text-white my-3  ">
-                  <p className="text-balance ">
-                    {bio}
-                  </p>
+                  <p className="text-balance ">{bio}</p>
                 </div>
                 <div className="peopleInteraction flex flex-wrap space-x-2 ">
                   <div className="icon-people my-1">
@@ -370,673 +381,110 @@ export default function Profile() {
             <div className="user-repo-details border-2 rounded-xl  max-w-96  m-2 border-gray-300 dark:border-neutral lg:min-w-96   ">
               <div className="all-repo  rounded  md:h-96 h-96 max-w-96 overflow-y-auto overflow-x-auto  md:overflow-auto  shadow-xl shadow-black flex flex-wrap justify-center p-2  ">
                 {/* REPO ELEMENT  start */}
-
-                <div className="repo w-64  shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral">
-                  <div className="repobody ">
-                    <div className="repoName">
-                      <span>
-                        <h1 className="text-2xl  text-pretty font-mono">
-                          {repoTittle}
-                        </h1>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="language ">
-                    <div className="language-used">
-                      <span>
-                        <p className="font-bold">
-                          Language:
-                          <span className="font-normal">{language}</span>
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="repo-content flex flex-wrap space-x-12">
-                    <div className="stars">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-width="2"
-                              d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
-                            />
-                          </svg>
-                          <div className="str-cnt">{strCnt}</div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoLink">
-                      <div className="linkicon">
-                        <a href={repo_link}>
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="fork_count">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                          </svg>
-                          <div className="count_fork">
-                            <span>{forks_count}</span>
+                {showRepo &&
+                  repoArrayData.map((item, index) => {
+                    return (
+                      <div
+                        className="repo w-64  shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral"
+                        key={index}
+                      >
+                        <div className="repobody ">
+                          <div className="repoName">
+                            <span>
+                              <h1 className="text-2xl  text-pretty font-mono">
+                                {item.name}
+                              </h1>
+                            </span>
                           </div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoSize"></div>
-                  </div>
-                </div>
-                <div className="repo w-64  shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral">
-                  <div className="repobody ">
-                    <div className="repoName">
-                      <span>
-                        <h1 className="text-2xl  text-pretty font-mono">
-                          {repoTittle}
-                        </h1>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="language ">
-                    <div className="language-used">
-                      <span>
-                        <p className="font-bold">
-                          Language:
-                          <span className="font-normal">{language}</span>
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="repo-content flex flex-wrap space-x-12">
-                    <div className="stars">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-width="2"
-                              d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
-                            />
-                          </svg>
-                          <div className="str-cnt">{strCnt}</div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoLink">
-                      <div className="linkicon">
-                        <a href={repo_link}>
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="fork_count">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                          </svg>
-                          <div className="count_fork">
-                            <span>{forks_count}</span>
+                        </div>
+                        <div className="language ">
+                          <div className="language-used">
+                            <span>
+                              <p className="font-bold">
+                                Language:
+                                <span className="font-normal">{item.language}</span>
+                              </p>
+                            </span>
                           </div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoSize"></div>
-                  </div>
-                </div>
-                <div className="repo w-64  shadow-md shadow-slate-200 h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral">
-                  <div className="repobody ">
-                    <div className="repoName">
-                      <span>
-                        <h1 className="text-2xl  text-pretty font-mono">
-                          {repoTittle}
-                        </h1>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="language ">
-                    <div className="language-used">
-                      <span>
-                        <p className="font-bold">
-                          Language:
-                          <span className="font-normal">{language}</span>
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="repo-content flex flex-wrap space-x-12">
-                    <div className="stars">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-width="2"
-                              d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
-                            />
-                          </svg>
-                          <div className="str-cnt">{strCnt}</div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoLink">
-                      <div className="linkicon">
-                        <a href={repo_link}>
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="fork_count">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                          </svg>
-                          <div className="count_fork">
-                            <span>{forks_count}</span>
+                        </div>
+                        <div className="repo-content flex flex-wrap space-x-12">
+                          <div className="stars">
+                            <div className="icon">
+                              <span class="text-gray-500 inline-flex items-center leading-none text-sm">
+                                <svg
+                                  class="w-6 h-6 text-gray-800 dark:text-white"
+                                  aria-hidden="true"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
+                                  />
+                                </svg>
+                                <div className="str-cnt">{strCnt}</div>
+                              </span>
+                            </div>
                           </div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoSize"></div>
-                  </div>
-                </div>
-                <div className="repo w-64  shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral">
-                  <div className="repobody ">
-                    <div className="repoName">
-                      <span>
-                        <h1 className="text-2xl  text-pretty font-mono">
-                          {repoTittle}
-                        </h1>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="language ">
-                    <div className="language-used">
-                      <span>
-                        <p className="font-bold">
-                          Language:
-                          <span className="font-normal">{language}</span>
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="repo-content flex flex-wrap space-x-12">
-                    <div className="stars">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-width="2"
-                              d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
-                            />
-                          </svg>
-                          <div className="str-cnt">{strCnt}</div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoLink">
-                      <div className="linkicon">
-                        <a href={repo_link}>
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="fork_count">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                          </svg>
-                          <div className="count_fork">
-                            <span>{forks_count}</span>
+                          <div className="repoLink">
+                            <div className="linkicon">
+                              <a href={item.html_url} target="_blank">
+                                <svg
+                                  class="w-6 h-6 text-gray-800 dark:text-white"
+                                  aria-hidden="true"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
+                                  />
+                                </svg>
+                              </a>
+                            </div>
                           </div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoSize"></div>
-                  </div>
-                </div>
-                <div className="repo w-64  shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral">
-                  <div className="repobody ">
-                    <div className="repoName">
-                      <span>
-                        <h1 className="text-2xl  text-pretty font-mono">
-                          {repoTittle}
-                        </h1>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="language ">
-                    <div className="language-used">
-                      <span>
-                        <p className="font-bold">
-                          Language:
-                          <span className="font-normal">{language}</span>
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="repo-content flex flex-wrap space-x-12">
-                    <div className="stars">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-width="2"
-                              d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
-                            />
-                          </svg>
-                          <div className="str-cnt">{strCnt}</div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoLink">
-                      <div className="linkicon">
-                        <a href={repo_link}>
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="fork_count">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                          </svg>
-                          <div className="count_fork">
-                            <span>{forks_count}</span>
+                          <div className="fork_count">
+                            <div className="icon">
+                              <span class="text-gray-500 inline-flex items-center leading-none text-sm">
+                                <svg
+                                  class="w-6 h-6 text-gray-800 dark:text-white"
+                                  aria-hidden="true"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="24"
+                                  height="24"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
+                                  />
+                                </svg>
+                                <div className="count_fork">
+                                  <span>{item.forks_count}</span>
+                                </div>
+                              </span>
+                            </div>
                           </div>
-                        </span>
+                          <div className="repoSize"></div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="repoSize"></div>
-                  </div>
-                </div>
-                <div className="repo w-64 shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral">
-                  <div className="repobody ">
-                    <div className="repoName">
-                      <span>
-                        <h1 className="text-2xl  text-pretty font-mono">
-                          {repoTittle}
-                        </h1>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="language ">
-                    <div className="language-used">
-                      <span>
-                        <p className="font-bold">
-                          Language:
-                          <span className="font-normal">{language}</span>
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="repo-content flex flex-wrap space-x-12">
-                    <div className="stars">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-width="2"
-                              d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
-                            />
-                          </svg>
-                          <div className="str-cnt">{strCnt}</div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoLink">
-                      <div className="linkicon">
-                        <a href={repo_link}>
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="fork_count">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                          </svg>
-                          <div className="count_fork">
-                            <span>{forks_count}</span>
-                          </div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoSize"></div>
-                  </div>
-                </div>
-                <div className="repo w-64  shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral">
-                  <div className="repobody ">
-                    <div className="repoName">
-                      <span>
-                        <h1 className="text-2xl  text-pretty font-mono">
-                          {repoTittle}
-                        </h1>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="language ">
-                    <div className="language-used">
-                      <span>
-                        <p className="font-bold">
-                          Language:
-                          <span className="font-normal">{language}</span>
-                        </p>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="repo-content flex flex-wrap space-x-12">
-                    <div className="stars">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-width="2"
-                              d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
-                            />
-                          </svg>
-                          <div className="str-cnt">{strCnt}</div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoLink">
-                      <div className="linkicon">
-                        <a href={repo_link}>
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
-                            />
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                    <div className="fork_count">
-                      <div className="icon">
-                        <span class="text-gray-500 inline-flex items-center leading-none text-sm">
-                          <svg
-                            class="w-6 h-6 text-gray-800 dark:text-white"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                          </svg>
-                          <div className="count_fork">
-                            <span>{forks_count}</span>
-                          </div>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="repoSize"></div>
-                  </div>
-                </div>
-
+                    );
+                  })}
+               
                 {/* REPO ELEMENT ENDS HERE */}
               </div>
             </div>
