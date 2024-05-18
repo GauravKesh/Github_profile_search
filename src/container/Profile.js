@@ -3,28 +3,23 @@ import React from "react";
 import { useState } from "react";
 
 export default function Profile() {
-  const [foundAlert, setfoundAlert] = useState(false); // FOR USER FOUND alert
-  const [notFoundAlert, setnotFoundAlert] = useState(false); // FOR USER NOT FOUND  alert
+  const [foundAlert, setFoundAlert] = useState(false); // For user found alert
+  const [notFoundAlert, setNotFoundAlert] = useState(false); // For user not found alert
   const [userSearch, setUserSearch] = useState("");
-  const [name, setName] = useState("github");
-  // const [callApi, setCallApi] = useState("https://api.github.com/users/{userName}");
-  const [userName, setUserName] = useState("github");
-  const [imageUrl, setImageUrl] = useState(
-    "https://avatars.githubusercontent.com/u/9919?s=200&v=4"
-  );
-  const [followers, setFollowers] = useState("0");
-  const [following, setFollowing] = useState("0");
-  const [location, setLocation] = useState("unknown");
-  const [lastActive, setLastActive] = useState("Today");
-  const [Joined, setJoined] = useState("2020");
-  const [fLink, setFLink] = useState("");
-  const [flLink, setFlLink] = useState("");
-  const [profileURL, setProfileURL] = useState("");
-  const [repo, setRepo] = useState("0");
-  const [bio, setBio] = useState("");
-  const [repo_link, setRepoLink] = useState("");
-  const [repoArrayData,setRepoArrayData] = useState([]);
-  const[showRepo,setShowRepo] = useState("true")
+  const [name, setName] = useState("github"); // Full name of the user
+  const [userName, setUserName] = useState("github"); // User name
+  const [imageUrl, setImageUrl] = useState("https://avatars.githubusercontent.com/u/9919?s=200&v=4"); // Profile URL
+  const [followers, setFollowers] = useState("0"); // Number of followers
+  const [following, setFollowing] = useState("0"); // Number of following
+  const [location, setLocation] = useState("unknown"); // User location
+  const [fLink, setFLink] = useState(""); // Followers link of user
+  const [flLink, setFlLink] = useState(""); // Following link of user
+  const [profileURL, setProfileURL] = useState(""); // User GitHub link
+  const [repo, setRepo] = useState("0"); // Number of public repositories
+  const [bio, setBio] = useState(""); // Bio of the user
+  const [repo_link, setRepoLink] = useState(""); // Repository link of user
+  const [repoArrayData, setRepoArrayData] = useState([]); // Storing repository data of user
+  const [showRepo, setShowRepo] = useState(true); // To show repo data
 
   // search user data
   const searchUrl = `https://api.github.com/users/${userSearch}`;
@@ -34,11 +29,11 @@ export default function Profile() {
       .then(function (data) {
         console.log(data);
         if (data.message === "Not Found") {
-          setnotFoundAlert(true);
+          setNotFoundAlert(true);
           alertfn();
           return false;
         } else {
-          setfoundAlert(true);
+          setFoundAlert(true);
           alertfn();
           setImageUrl(data.avatar_url);
           setName(data.name);
@@ -57,17 +52,9 @@ export default function Profile() {
         }
       });
   };
-  // search user repo data
+  // fetch  user repo data
   const repoUrl = `https://api.github.com/users/${userSearch}/repos`;
   const fetchRepo = async () => {
-    // try {
-    //   const response = await fetch(repoUrl);
-    //   const repoData = await response.json();
-
-    //   setRepoArrayData(repoData); // Update repoData with the fetched data
-    // } catch (error) {
-    //   console.error("Error fetching repo data:", error);
-    // }
     await fetch(repoUrl)
       .then((response) => response.json())
       .then(function (repoData) {
@@ -76,7 +63,7 @@ export default function Profile() {
           alert("USER DOESN'T HAVE ANY REPO");
         } else {
           console.log("USER HAVE REPO");
-          const arr = Object.values(repoData)
+          const arr = Object.values(repoData);
           setRepoArrayData(arr);
           console.log(repoArrayData);
         }
@@ -84,10 +71,9 @@ export default function Profile() {
   };
   // alert function timeout
   const alertfn = (e) => {
-    
     setTimeout(() => {
-      setfoundAlert(false);
-      setnotFoundAlert(false);
+      setFoundAlert(false);
+      setNotFoundAlert(false);
     }, 800);
   };
 
@@ -147,6 +133,7 @@ export default function Profile() {
               <div className="searchbar mt-5 " id="searchBar">
                 <form
                   className="flex items-center max-w-sm mx-auto "
+                  
                   value={userSearch}
                   onChange={(e) => {
                     setUserSearch(e.target.value);
@@ -184,8 +171,8 @@ export default function Profile() {
                     onClick={(e) => {
                       console.log(userSearch);
                       e.preventDefault();
-                      document.getElementById("searchBar").value = "";
                       fetchUser();
+                      document.getElementById("simple-search").value = ""; // clear the input
                     }}
                   >
                     <svg
@@ -213,12 +200,12 @@ export default function Profile() {
         {/* PROFILE-SEARCH RESULT */}
 
         <div className="container flex flex-wrap justify-center rounded mt-5 ">
-          {/* USER DATA FETCHED */}
+          {/* USER DATA FETCHED  */}
 
           <div className="github-detail  rounded flex  flex-wrap flex-row mt-3  h-96 justify-center md:flex-col sm:flex-col lg:justify-center md:justify-center  ">
             {/* PROFILE DATA */}
 
-            <div className="github-user-data-side mt-2 rounded-xl border-2 border-gray-300 dark:border-neutral h-full  lg:w-96 flex flex-wrap flex-col  justify-center  shadow-xl shadow-black">
+            <div className="github-user-data-side mt-2 rounded-xl border-2 border-gray-300 dark:border-neutral h-full w-96   lg:w-96  flex flex-wrap flex-col  justify-center  shadow-xl shadow-black">
               <div className="data-side-inside mx-3">
                 <div className="profile-img flex justify-center mb-2">
                   <div className="avatar ">
@@ -385,6 +372,7 @@ export default function Profile() {
                         key={index}
                       >
                         <div className="repobody mt-2">
+                          {/* REPO NAME */}
                           <div className="repoName">
                             <span>
                               <h1
@@ -396,6 +384,7 @@ export default function Profile() {
                             </span>
                           </div>
                         </div>
+                        {/* LANGUAGE USED */}
                         <div className="language ">
                           <div className="language-used">
                             <span>
@@ -408,7 +397,9 @@ export default function Profile() {
                             </span>
                           </div>
                         </div>
+                        {/* LANGUAGE USED ENDS */}
                         <div className="repo-content flex flex-wrap space-x-12">
+                          {/* STARED DETAILS  */}
                           <div className="stars">
                             <div className="icon">
                               <span class="text-gray-500 inline-flex items-center leading-none text-sm">
@@ -433,6 +424,7 @@ export default function Profile() {
                               </span>
                             </div>
                           </div>
+                          {/* REPO URL */}
                           <div className="repoLink">
                             <div className="linkicon">
                               <a href={item.html_url} target="_blank">
@@ -456,6 +448,7 @@ export default function Profile() {
                               </a>
                             </div>
                           </div>
+                          {/* FORK DETAILS */}
                           <div className="fork_count">
                             <div className="icon">
                               <span class="text-gray-500 inline-flex items-center leading-none text-sm">
@@ -487,7 +480,7 @@ export default function Profile() {
                       </div>
                     );
                   })}
-               
+
                 {/* REPO ELEMENT ENDS HERE */}
               </div>
             </div>
