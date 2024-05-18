@@ -230,8 +230,10 @@ export default function Profile() {
                     </p>
                   </div>
                 </div>
-                <div className="bio font-bold  text-balance text-black dark:text-white my-3 ">
-                  <p className="text-balance "> {bio}</p>
+                <div className="bio font-bold  text-balance text-black dark:text-white my-3  ">
+                  <p className="text-balance ">
+                    {bio}
+                  </p>
                 </div>
                 <div className="peopleInteraction flex flex-wrap space-x-2 ">
                   <div className="icon-people my-1">
