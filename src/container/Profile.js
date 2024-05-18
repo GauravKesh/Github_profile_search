@@ -22,11 +22,7 @@ export default function Profile() {
   const [profileURL, setProfileURL] = useState("");
   const [repo, setRepo] = useState("0");
   const [bio, setBio] = useState("");
-  const [repoTittle, setRepoTittle] = useState("repo");
-  const [strCnt, setStrCnt] = useState("2");
   const [repo_link, setRepoLink] = useState("");
-  const [forks_count, setForksCount] = useState(0);
-  const [language, setLanguage] = useState("HTML");
   const [repoArrayData,setRepoArrayData] = useState([]);
   const[showRepo,setShowRepo] = useState("true")
 
@@ -385,13 +381,16 @@ export default function Profile() {
                   repoArrayData.map((item, index) => {
                     return (
                       <div
-                        className="repo w-64  shadow-md shadow-slate-200  h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral"
+                        className="repo w-64  shadow-md shadow-slate-200 overflow-hidden h-36 my-2 mx-2 px-2 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral"
                         key={index}
                       >
-                        <div className="repobody ">
+                        <div className="repobody mt-2">
                           <div className="repoName">
                             <span>
-                              <h1 className="text-2xl  text-pretty font-mono">
+                              <h1
+                                className="text-xl text-wrap font-bold font-mono"
+                                style={{ wordWrap: "break-word" }}
+                              >
                                 {item.name}
                               </h1>
                             </span>
@@ -400,9 +399,11 @@ export default function Profile() {
                         <div className="language ">
                           <div className="language-used">
                             <span>
-                              <p className="font-bold">
+                              <p className="font-bold font-mono">
                                 Language:
-                                <span className="font-normal">{item.language}</span>
+                                <span className="font-normal">
+                                  {item.language}
+                                </span>
                               </p>
                             </span>
                           </div>
@@ -426,7 +427,9 @@ export default function Profile() {
                                     d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
                                   />
                                 </svg>
-                                <div className="str-cnt">{strCnt}</div>
+                                <div className="str-cnt">
+                                  {item.watchers_count}
+                                </div>
                               </span>
                             </div>
                           </div>
