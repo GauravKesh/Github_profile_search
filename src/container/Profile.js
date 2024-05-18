@@ -82,7 +82,7 @@ export default function Profile() {
       <div className="github-container bg-grey-900  flex  flex-wrap  justify-center ">
         {/* HEADER SECTION OF THE PROJECT */}
         <div className="flex flex-row text-center  w-full mb-19 justify-center space-x-20">
-          <h1 className="text-3xl text-10xl my-5 title-font  text-black dark:text-gray-400 text-pretty font-bold   rounded-xl  ">
+          <h1 className=" my-5 text-5xl title-font  text-black dark:text-gray-400 text-pretty font-bold   rounded-xl  ">
             Github Clone
           </h1>
         </div>
