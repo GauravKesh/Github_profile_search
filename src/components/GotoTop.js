@@ -28,11 +28,11 @@ const GoToTop = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-4 right-4">
+    <div className="fixed animate-bounce bottom-5 right-7">
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="p-3 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          className="p-3 bg-blue-500 text-white rounded-full shadow-lg  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
         >
           ↑
         </button>
