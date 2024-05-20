@@ -1,14 +1,16 @@
 import React from "react";
-import Profile from "./container/Profile";
+import Profile from "./components/Profile";
+import Footer from "./components/Footer";
+import K from "./components/K";
 
-
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <>
-      <div className=" bg-grey-900  h-screen">
-        <Profile />
-      </div>
+    <Navbar/>
+   {/*  <Footer/> */}
+ 
     </>
   );
 }
