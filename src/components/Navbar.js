@@ -1,9 +1,11 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import { useRef, useState, useEffect } from "react";
 import { Fade, Zoom } from "react-awesome-reveal";
 import img from "../image/myLogo.png";
 import Profile from "./Profile";
+import Footer from "./Footer";
 
 export default function Navbar() {
   const [foundAlert, setFoundAlert] = useState(false); // For user found alert
@@ -26,9 +28,16 @@ export default function Navbar() {
   const [repoArrayData, setRepoArrayData] = useState([]); // Storing repository data of user
   const [showRepo, setShowRepo] = useState(true); // To show repo data
 
-  // const {foundAlert,notFoundAlert}+
+// it alerts user if search section is empty and search is performed
 
-  // const {}
+  const onClickCheckUserName=()=>{
+    if(userSearch){
+      fetchUser();
+    }
+    else{
+      alert("Please fill user name")
+    }
+  }
 
   // search user data
   const searchUrl = `https://api.github.com/users/${userSearch}`;
@@ -43,7 +52,6 @@ export default function Navbar() {
           return false;
         } else {
           setFoundAlert(true);
-          
           setImageUrl(data.avatar_url);
           setName(data.name);
           setUserName(data.login);
@@ -58,6 +66,7 @@ export default function Navbar() {
           setProfileURL(data.html_url);
           console.log("USER DATA FOUND");
           fetchRepo();
+          setUserSearch("");
         }
       });
     // alert function timeout
@@ -95,11 +104,11 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 ">
         <div className="flex-1">
-          <a className="btn btn-ghost hover:bg-transparent bg-transparent text-xl">Github Clone</a>
+          <a className="btn btn-ghost text-slate-400 font-sans hover:bg-transparent bg-transparent text-4xl subpixel-antialiased  hover:cursor-auto ">Github Clone</a>
         </div>
-        <div className="flex-none gap-2">
+        <div className="flex-none gap-2 ">
           {/* USER SEARCH PROFILE */}
           <div className="github-profile-search">
             <div className="searchbar mt-1 " id="searchBar">
@@ -110,7 +119,7 @@ export default function Navbar() {
                   setUserSearch(e.target.value);
                 }}
               >
-                <label for="simple-search" className="sr-only">
+                <label htmlFor="simple-search" className="sr-only">
                   Search
                 </label>
                 <div className="relative w-full shadow-md shadow-black rounded-2xl">
@@ -142,7 +151,7 @@ export default function Navbar() {
                   onClick={(e) => {
                     console.log(userSearch);
                     e.preventDefault();
-                    fetchUser();
+                    onClickCheckUserName();
                     document.getElementById("simple-search").value = ""; // clear the input
                   }}
                 >
@@ -155,9 +164,9 @@ export default function Navbar() {
                   >
                     <path
                       stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                     />
                   </svg>
@@ -269,7 +278,7 @@ export default function Navbar() {
                             className="mt-1"
                           >
                             <path
-                              fill-rule="evenodd"
+                              fillRule="evenodd"
                               d="M6 0C2.69 0 0 2.5 0 5.5C0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5C1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36c.92.86 1.44 1.97 1.44 3.14c0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2c-1.11 0-2-.89-2-2c0-1.11.89-2 2-2c1.11 0 2 .89 2 2z"
                               fill="currentColor"
                             />
@@ -281,7 +290,7 @@ export default function Navbar() {
                         </div>
                         {/* No of repos */}
                         <div className="repo flex flex-wrap space-x-1">
-                          <div class="repo-icon my-1 ">
+                          <div className="repo-icon my-1 ">
                             <a
                               href={repo_link}
                               target="_blank"
@@ -310,7 +319,7 @@ export default function Navbar() {
                           <div className="follow">
                             <button
                               type="button"
-                              class="px-3 py-2 pt-2 my-2 text-xs font-medium text-center text-gray-200 dark:text-white bg-black-700 rounded-lg hover:bg-blue-700 focus:ring-1 focus:outline-none focus:ring-blue-300 bg-blue-700
+                              className="px-3 py-2 pt-2 my-2 text-xs font-medium text-center text-gray-200 dark:text-white bg-black-700 rounded-lg hover:bg-blue-700 focus:ring-1 focus:outline-none focus:ring-blue-300 bg-blue-700
                        dark:bg-blue-700 "
                             >
                               <div className="repoLink">
@@ -324,7 +333,7 @@ export default function Navbar() {
                                       <span>Follow</span>
                                     </div>
                                     <svg
-                                      class="w-3 h-3 text-gray-200 dark:text-white my-1"
+                                      className="w-3 h-3 text-gray-200 dark:text-white my-1"
                                       aria-hidden="true"
                                       xmlns="http://www.w3.org/2000/svg"
                                       width="5"
@@ -334,9 +343,9 @@ export default function Navbar() {
                                     >
                                       <path
                                         stroke="currentColor"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
                                         d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
                                       />
                                     </svg>

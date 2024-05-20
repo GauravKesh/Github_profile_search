@@ -88,9 +88,9 @@ export default function Profile(props) {
                             {/* STARED DETAILS  */}
                             <div className="stars">
                               <div className="icon">
-                                <span class="text-gray-500 inline-flex items-center leading-none text-sm">
+                                <span className="text-gray-500 inline-flex items-center leading-none text-sm">
                                   <svg
-                                    class="w-6 h-6 text-gray-800 dark:text-slate-600"
+                                    className="w-6 h-6 text-gray-800 dark:text-slate-600"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
@@ -100,7 +100,7 @@ export default function Profile(props) {
                                   >
                                     <path
                                       stroke="currentColor"
-                                      stroke-width="2"
+                                      strokeWidth="2"
                                       d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z"
                                     />
                                   </svg>
@@ -115,7 +115,7 @@ export default function Profile(props) {
                               <div className="linkicon">
                                 <a href={item.html_url} target="_blank">
                                   <svg
-                                    class="w-6 h-6 text-gray-800 dark:text-slate-600 hover:text-instagram-blue"
+                                    className="w-6 h-6 text-gray-800 dark:text-slate-600 hover:text-instagram-blue"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
@@ -125,9 +125,9 @@ export default function Profile(props) {
                                   >
                                     <path
                                       stroke="currentColor"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2"
                                       d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"
                                     />
                                   </svg>
@@ -137,9 +137,9 @@ export default function Profile(props) {
                             {/* FORK DETAILS */}
                             <div className="fork_count">
                               <div className="icon">
-                                <span class="text-gray-500 inline-flex items-center leading-none text-sm">
+                                <span className="text-gray-500 inline-flex items-center leading-none text-sm">
                                   <svg
-                                    class="w-6 h-6 text-gray-800 dark:text-slate-600"
+                                    className="w-6 h-6 text-gray-800 dark:text-slate-600"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
@@ -149,9 +149,9 @@ export default function Profile(props) {
                                   >
                                     <path
                                       stroke="currentColor"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      strokeWidth="2"
                                       d="M12 12v4m0 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 0v2a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V8m0 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
                                     />
                                   </svg>
@@ -177,7 +177,6 @@ export default function Profile(props) {
         </div>
       </div>
       <GoToTop/>
-
     </>
   );
 }
