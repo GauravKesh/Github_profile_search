@@ -9,7 +9,8 @@ import Footer from "./Footer";
 
 export default function Navbar() {
   const [foundAlert, setFoundAlert] = useState(false); // For user found alert
-  const [notFoundAlert, setNotFoundAlert] = useState(false); // For user not found alert
+  const [notFoundAlert, setNotFoundAlert] = useState(false); // For user not found alert.
+  const [userNameEnterAlert, setUserNameEnterAlert] = useState(false); // to alert user if trying to search when it's empty
   const [userSearch, setUserSearch] = useState("");
   const [name, setName] = useState("github"); // Full name of the user
   const [userName, setUserName] = useState("github"); // User name
@@ -26,25 +27,19 @@ export default function Navbar() {
   const [bio, setBio] = useState(""); // Bio of the user
   const [repo_link, setRepoLink] = useState(""); // Repository link of user
   const [repoArrayData, setRepoArrayData] = useState([]); // Storing repository data of user
-  const [showRepo, setShowRepo] = useState(true); // To show repo data
 
-// it alerts user if search section is empty and search is performed
+  // alert user
+  let alertfn ;
 
-  const onClickCheckUserName=()=>{
-    if(userSearch){
+  // it alerts user if search section is empty and search is performed
+  const onClickCheckUserName = () => {
+    if (userSearch) {
       fetchUser();
+    } else {
+      setUserNameEnterAlert(true);
+      alertfn();
     }
-    else{
-      alert("Please fill user name")
-    }
-  }
-    const alertfn = (e) => {
-      setTimeout(() => {
-        setFoundAlert(false);
-        setNotFoundAlert(false);
-      }, 800);
-    };
-
+  };
 
   // search user data
   const searchUrl = `https://api.github.com/users/${userSearch}`;
@@ -56,9 +51,9 @@ export default function Navbar() {
         if (data.message === "Not Found") {
           setNotFoundAlert(true);
           alertfn();
-          return false;
         } else {
           setFoundAlert(true);
+          alertfn();
           setImageUrl(data.avatar_url);
           setName(data.name);
           setUserName(data.login);
@@ -77,12 +72,6 @@ export default function Navbar() {
         }
       });
     // alert function timeout
-    const alertfn = (e) => {
-      setTimeout(() => {
-        setFoundAlert(false);
-        setNotFoundAlert(false);
-      }, 800);
-    };
   };
   // fetch  user repo data
   const repoUrl = `https://api.github.com/users/${userSearch}/repos`;
@@ -102,13 +91,21 @@ export default function Navbar() {
       });
   };
 
-
+  alertfn = () => {
+    setTimeout(() => {
+      setFoundAlert(false);
+      setNotFoundAlert(false);
+      setUserNameEnterAlert(false);
+    }, 3000);
+  };
 
   return (
     <>
       <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost text-slate-400 font-sans hover:bg-transparent bg-transparent text-xl subpixel-antialiased  hover:cursor-auto ">Github Clone</a>
+          <a className="btn btn-ghost text-slate-400 font-sans hover:bg-transparent bg-transparent text-xl subpixel-antialiased  hover:cursor-auto ">
+            Github Clone
+          </a>
         </div>
         <div className="flex-none gap-2 ">
           {/* USER SEARCH PROFILE */}
@@ -366,10 +363,32 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      {/* Alert */}
+      <div className="fixed alert-c h-5 mt-2 right-5">
+        {foundAlert && (
+          <Zoom>
+            <div role="alert" className="badge badge-warning gap-2 p-5 z-20">
+              <span> User Found !!</span>
+            </div>
+          </Zoom>
+        )}
+        {notFoundAlert && (
+          <Zoom>
+            <div role="alert" className="badge badge-warning gap-2 p-5 z-20">
+              <span>Oops No User Found !!</span>
+            </div>
+          </Zoom>
+        )}
+        {userNameEnterAlert && (
+          <Zoom>
+            <div role="alert" className="badge badge-warning gap-2 p-5 z-20">
+              <span> Please write the user name to search user..</span>
+            </div>
+          </Zoom>
+        )}
+      </div>
       {/* Passing data to child(Profile.js) */}
-      <Profile
-        data={repoArrayData}
-      />
+      <Profile data={repoArrayData} />
     </>
   );
 }
