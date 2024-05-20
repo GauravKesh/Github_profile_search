@@ -30,7 +30,7 @@ export default function Profile(props) {
       <div className="github-container bg-grey-900  flex  flex-wrap  justify-center  ">
         {/* HEADER SECTION OF THE PROJECT */}
         <div className="flex flex-row text-center  w-full  justify-center space-x-20">
-          <h1 className="github-title my-5 text-3xl lg:te title-font  text-black dark:text-gray-400 text-pretty font-bold   rounded-xl  ">
+          <h1 className="github-title my-5 text-lg lg:te title-font  text-black dark:text-gray-400 text-pretty font-bold   rounded-xl  ">
             Repositories
           </h1>
         </div>

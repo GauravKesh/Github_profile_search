@@ -104,9 +104,9 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-base-100 flex flex-wrap">
+      <div className="navbar bg-base-100">
         <div className="flex-1">
-          <a className="btn btn-ghost text-slate-400 font-sans hover:bg-transparent bg-transparent text-4xl subpixel-antialiased  hover:cursor-auto ">Github Clone</a>
+          <a className="btn btn-ghost text-slate-400 font-sans hover:bg-transparent bg-transparent text-xl subpixel-antialiased  hover:cursor-auto ">Github Clone</a>
         </div>
         <div className="flex-none gap-2 ">
           {/* USER SEARCH PROFILE */}
