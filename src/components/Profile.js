@@ -90,7 +90,7 @@ export default function Profile(props) {
                               <div className="icon">
                                 <span class="text-gray-500 inline-flex items-center leading-none text-sm">
                                   <svg
-                                    class="w-6 h-6 text-gray-800 dark:text-white"
+                                    class="w-6 h-6 text-gray-800 dark:text-slate-600"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
@@ -115,7 +115,7 @@ export default function Profile(props) {
                               <div className="linkicon">
                                 <a href={item.html_url} target="_blank">
                                   <svg
-                                    class="w-6 h-6 text-gray-800 dark:text-white"
+                                    class="w-6 h-6 text-gray-800 dark:text-slate-600 hover:text-instagram-blue"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
@@ -139,7 +139,7 @@ export default function Profile(props) {
                               <div className="icon">
                                 <span class="text-gray-500 inline-flex items-center leading-none text-sm">
                                   <svg
-                                    class="w-6 h-6 text-gray-800 dark:text-white"
+                                    class="w-6 h-6 text-gray-800 dark:text-slate-600"
                                     aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"

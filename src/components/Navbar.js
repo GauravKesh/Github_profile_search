@@ -324,7 +324,7 @@ export default function Navbar() {
                                       <span>Follow</span>
                                     </div>
                                     <svg
-                                      class="w-3 h-3 text-gray-800 dark:text-white my-1"
+                                      class="w-3 h-3 text-gray-200 dark:text-white my-1"
                                       aria-hidden="true"
                                       xmlns="http://www.w3.org/2000/svg"
                                       width="5"
