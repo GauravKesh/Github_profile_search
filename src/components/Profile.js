@@ -3,6 +3,7 @@ import React from "react";
 import { useState ,useEffect} from "react";
 import { Fade ,Zoom} from "react-awesome-reveal";
 import Footer from "./Footer";
+import GoToTop from "./GotoTop";
 
 export default function Profile(props) {
   
@@ -175,6 +176,7 @@ export default function Profile(props) {
           </div>
         </div>
       </div>
+      <GoToTop/>
 
     </>
   );
