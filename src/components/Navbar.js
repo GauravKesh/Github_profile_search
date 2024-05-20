@@ -83,6 +83,7 @@ export default function Navbar() {
         if (repoData.message === "not found") {
           alert("USER DOESN'T HAVE ANY REPO");
         } else {
+          setUserSearch("");
           console.log("USER HAVE REPO");
           const arr = Object.values(repoData);
           setRepoArrayData(arr);

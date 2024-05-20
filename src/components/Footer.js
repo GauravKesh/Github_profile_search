@@ -20,7 +20,8 @@ export default function Footer() {
         <Fade>
           <footer className="text-gray-400 bg-gray-900 body-font">
             <div className="container w-full px-5 py-8 mx-auto flex items-center sm:flex-row flex-col ">
-              <a className="flex title-font font-medium items-center hover:cursor-pointer md:justify-start justify-center text-white">
+              <a href="https://gkrcoder.vercel.app/" target="_blank" className="flex title-font font-medium items-center hover:cursor-pointer md:justify-start justify-center text-white">
+              
                 <img className="w-11 rounded h-11" src={glogo} alt="logo" />
               </a>
               <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
