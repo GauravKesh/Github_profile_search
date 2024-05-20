@@ -47,7 +47,6 @@ export default function Navbar() {
     await fetch(searchUrl)
       .then((response) => response.json())
       .then(function (data) {
-        console.log(data);
         if (data.message === "Not Found") {
           setNotFoundAlert(true);
           alertfn();
@@ -79,7 +78,6 @@ export default function Navbar() {
     await fetch(repoUrl)
       .then((response) => response.json())
       .then(function (repoData) {
-        console.log(repoData);
         if (repoData.message === "not found") {
           alert("USER DOESN'T HAVE ANY REPO");
         } else {
@@ -87,7 +85,6 @@ export default function Navbar() {
           console.log("USER HAVE REPO");
           const arr = Object.values(repoData);
           setRepoArrayData(arr);
-          console.log(repoArrayData);
         }
       });
   };
