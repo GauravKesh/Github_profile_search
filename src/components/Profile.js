@@ -35,26 +35,21 @@ export default function Profile(props) {
           </h1>
         </div>
         {/* HEADER SECTION OF THE PROJECT ENDS*/}
-        <div className="github-body  pt-0 pr-2 pl-3 lg:w-1/2 md:w-full justify-center flex flex-row md:flex-row flex-wrap   ">
-          <div className="form-section container ">
-            {/* TO GIVE USER ALERT ABOUT THE PROFILE SEARCH */}
-           
-          </div>
-        </div>
-        <div className="container flex flex-wrap justify-center rounded mt-5 ">
+        <div className="github-body  pt-0 pr-2 pl-3 lg:w-1/2 md:w-full justify-center flex flex-row md:flex-row flex-wrap   "></div>
+        <div className="container  flex flex-wrap justify-center rounded mt-5 ">
           {/* USER DATA FETCHED  */}
-          <div className="github-detail  rounded flex  flex-wrap flex-row  m-8 h-96 justify-center md:flex-col sm:flex-col lg:justify-center md:justify-center   ">
+          <div className="github-detail  rounded flex  flex-wrap flex-row  m-8 min-h-screen xl:min-h-screen lg:min-h-screen sm:min-h-screen justify-center md:flex-col sm:flex-col lg:justify-center md:justify-center   ">
             {/* REPO DATA */}
 
-            <div className="user-repo-details   rounded-xl flex justify-center mx-5  border-gray-300 dark:border-neutral   ">
-              <div className="all-repo  rounded      shadow-black flex flex-wrap justify-center mb-8 ">
+            <div className="user-repo-details rounded-xl flex justify-center mx-5  border-gray-300 dark:border-neutral   ">
+              <div className="all-repo h-auto rounded   shadow-black flex flex-wrap justify-center mb-8  ">
                 {/* REPO ELEMENT  start */}
                 {showRepo &&
                   repoArrayDataK.map((item, index) => {
                     return (
                       <Zoom cascade>
                         <div
-                          className="repo w-64  shadow-lg shadow-black overflow-hidden h-36 my-2 mx-2 px-2 mb-3 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral"
+                          className="repo w-64  shadow-lg shadow-black overflow-hidden h-36 my-2 mx-2 px-2 mb-3 justify-between flex flex-wrap flex-col  rounded border-gray-300 dark:border-neutral hover:scale-110"
                           key={index}
                         >
                           <div className="repobody mt-2 ">
@@ -176,7 +171,7 @@ export default function Profile(props) {
           </div>
         </div>
       </div>
-      <GoToTop/>
+      <GoToTop />
     </>
   );
 }

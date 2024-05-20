@@ -38,6 +38,13 @@ export default function Navbar() {
       alert("Please fill user name")
     }
   }
+    const alertfn = (e) => {
+      setTimeout(() => {
+        setFoundAlert(false);
+        setNotFoundAlert(false);
+      }, 800);
+    };
+
 
   // search user data
   const searchUrl = `https://api.github.com/users/${userSearch}`;
@@ -94,12 +101,7 @@ export default function Navbar() {
         }
       });
   };
-  const alertfn = (e) => {
-    setTimeout(() => {
-      setFoundAlert(false);
-      setNotFoundAlert(false);
-    }, 800);
-  };
+
 
 
   return (
